@@ -1,1 +1,35 @@
-/target
+# Rust / Cargo
+# ============
+# This is the most important line. It ignores the build directory where Cargo
+# places all compiled code, dependencies, and build artifacts.
+/target/
+
+# Ignore compiled crate files created by `cargo package`
+*.crate
+
+# Ignore rustc backup files
+*.rs.bk
+
+
+# Environment
+# ===========
+# Ignore environment variables and secrets.
+# A `.env.example` file can be committed instead as a template.
+.env
+.env.*
+!.env.example
+
+# IDEs & Editors
+# ==============
+# VS Code
+.vscode/
+
+# JetBrains (RustRover, CLion, IntelliJ)
+.idea/
+
+# Vim
+*~
+*.swp
+*.swo
+
+# Emacs
