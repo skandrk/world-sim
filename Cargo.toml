@@ -1,0 +1,39 @@
+[package]
+name = "world-sim"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+bevy = { version = "0.12", default-features = false, features = [
+  "dynamic_linking",
+  "bevy_winit",
+  "bevy_render",
+  "bevy_core_pipeline",
+  "bevy_sprite",
+  "wayland",
+] }
+rand = "0.8"
+
+# Fast compile profile for development
+[profile.dev]
+opt-level = 1      # Some optimization for better runtime performance
+debug = true       # Keep debug info
+incremental = true # Enable incremental compilation
+codegen-units = 1  # Maximum parallel compilation for fastest dev builds
+
+# Fast compile with some optimization
+[profile.dev.package."*"]
+opt-level = 3 # Optimize dependencies (compile once, reuse)
+
+# Release profile with maximum safe optimization
+[profile.release]
+opt-level = 3
+lto = "fat"       # Full LTO for maximum optimization
+codegen-units = 1 # Single unit for best optimization
+strip = true      # Remove debug symbols from binary
+# Keep overflow-checks = true (default) for safety
+# Keep panic = "unwind" (default) for better error handling
+
+# Optional: Use bleeding edge features for even faster builds
+# [profile.dev]
+# split-debuginfo = "unpacked"  # Linux/macOS only - faster debug builds
